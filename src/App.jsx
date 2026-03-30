@@ -1487,7 +1487,7 @@ const App = () => {
         <>
           {/* Hero Split Layout */}
           <section id="home" style={{ minHeight: '100vh', display: 'flex', alignItems: 'stretch' }}>
-            <div style={{ flex: 1, padding: '180px 4rem 100px 8rem', display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--bg-dark)', borderRight: '1px solid var(--glass-border)' }}>
+            <div className="hero-left-content" style={{ flex: 1, display: 'flex', flexDirection: 'column', justifyContent: 'center', background: 'var(--bg-dark)' }}>
               <div data-reveal style={{ position: 'relative' }}>
                 <h1 style={{ fontSize: '4.5rem', lineHeight: '0.9', marginBottom: '2rem', color: 'var(--accent)', fontWeight: '900' }}>ESTILO &<br/>ALMA.</h1>
                 <h2 style={{ fontSize: '1.4rem', color: 'var(--text-main)', marginBottom: '3rem', fontWeight: '600', letterSpacing: '2px' }}>Excelência em cada detalhe.</h2>
@@ -1500,7 +1500,7 @@ const App = () => {
                 </div>
               </div>
             </div>
-            <div style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
+            <div className="hero-right-image" style={{ flex: 1, position: 'relative', overflow: 'hidden' }}>
               <div style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', background: `linear-gradient(90deg, var(--bg-dark), rgba(22, 22, 22, 0.4)), url(${heroStany})`, backgroundSize: 'cover', backgroundPosition: 'center' }}></div>
               {/* Decorative Corner Marks */}
               <div style={{ position: 'absolute', top: '50px', right: '50px', width: '100px', height: '100px', borderTop: '2px solid var(--primary)', borderRight: '2px solid var(--primary)', opacity: 0.3 }}></div>
@@ -1842,7 +1842,7 @@ const App = () => {
         <button 
           onClick={() => navigateTo('booking')} 
           className="fab-booking"
-          style={{ borderRadius: '16px', background: 'var(--accent)', boxShadow: '0 8px 25px rgba(212, 163, 115, 0.4)', padding: '1rem 1.5rem' }}
+          style={{ borderRadius: '16px', background: 'var(--accent)', boxShadow: '0 8px 25px rgba(212, 163, 115, 0.4)' }}
         >
           <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
           <span className="fab-text" style={{ fontSize: '0.9rem', fontWeight: '900', color: 'black' }}>Agendar Agora</span>
