@@ -631,6 +631,22 @@ const App = () => {
         </header>
       )}
 
+      {/* Mobile Nav Overlay */}
+      {!isAdmin && (
+        <div className={`mobile-nav-overlay ${isMenuOpen ? 'active' : ''}`}>
+          <button onClick={() => { setIsMenuOpen(false); navigateTo('home'); }} className="nav-link" style={{ background: 'none', border: 'none' }}>Início</button>
+          <button onClick={() => { setIsMenuOpen(false); navigateTo('services'); }} className="nav-link" style={{ background: 'none', border: 'none' }}>Ver Serviços</button>
+          <button onClick={() => { setIsMenuOpen(false); navigateTo('location'); }} className="nav-link" style={{ background: 'none', border: 'none' }}>Localização</button>
+          <button 
+            onClick={() => { setIsMenuOpen(false); navigateTo('booking'); }} 
+            className="btn-primary" 
+            style={{ marginTop: '2rem', padding: '1rem 3rem', fontSize: '1.2rem' }}
+          >
+            Agendar Agora
+          </button>
+        </div>
+      )}
+
       {isAdmin ? (
         /* Admin View Header */
         <section className="admin-view" style={{ minHeight: '100vh', background: 'var(--bg-dark)' }}>

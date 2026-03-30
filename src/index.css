@@ -25,10 +25,8 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   background-image: 
-    radial-gradient(circle at 50% 0%, rgba(212, 163, 115, 0.05) 0%, transparent 50%),
-    linear-gradient(rgba(255, 255, 255, 0.02) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 255, 255, 0.02) 1px, transparent 1px);
-  background-size: 100% 100%, 60px 60px, 60px 60px;
+    radial-gradient(circle at 50% 0%, rgba(212, 163, 115, 0.05) 0%, transparent 50%);
+  background-size: 100% 100%;
 }
 
 h1, h2, h3 {
@@ -238,10 +236,8 @@ button {
   box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
 }
 
-.nav-list {
-  display: flex;
-  gap: 2.5rem;
-  align-items: center;
+.mobile-nav-overlay {
+  display: none;
 }
 
 .nav-link {
@@ -654,7 +650,7 @@ button {
     background: var(--primary);
   }
 
-  .nav-list {
+  .mobile-nav-overlay {
     position: fixed;
     top: 0;
     right: -100%;
@@ -672,7 +668,7 @@ button {
     z-index: 1000;
   }
 
-  .nav-list.active {
+  .mobile-nav-overlay.active {
     right: 0;
   }
 
