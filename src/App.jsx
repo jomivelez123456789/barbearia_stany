@@ -1528,7 +1528,7 @@ const App = () => {
           <section id="services" className="section-padding" style={{ background: 'var(--bg-dark)', position: 'relative', padding: '12rem 0' }}>
             <div className="container">
               <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '8rem' }}>
-                <h2 style={{ fontSize: '4rem', margin: 0, fontWeight: '900' }} data-reveal>Catálogo de Serviços</h2>
+                <h2 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', margin: 0, fontWeight: '900' }} data-reveal>Catálogo de Serviços</h2>
                 <div style={{ flex: 1, height: '1px', background: 'var(--glass-border)' }}></div>
               </div>
 
@@ -1571,7 +1571,7 @@ const App = () => {
           <section id="location" className="section-padding" style={{ background: '#1a1a1a', padding: '12rem 0' }}>
             <div className="container">
               <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '8rem' }}>
-                <h2 style={{ fontSize: '4rem', margin: 0, fontWeight: '900' }} data-reveal>Localização</h2>
+                <h2 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', margin: 0, fontWeight: '900' }} data-reveal>Localização</h2>
                 <div style={{ flex: 1, height: '1px', background: 'var(--glass-border)' }}></div>
               </div>
 
@@ -1609,7 +1609,7 @@ const App = () => {
                       src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3111.1402026209676!2d-9.187371899999999!3d38.7604882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd1932d28bec1c71%3A0xfe5f2f22e324e61a!2sTv.%20Pregoeiro%2020A%2C%201600-534%20Lisboa!5e0!3m2!1spt-PT!2spt!4v1774702923688!5m2!1spt-PT!2spt" 
                       width="100%" 
                       height="100%" 
-                      style={{ border: 0 }} 
+                      style={{ border: 0, maxWidth: '100%' }}
                       allowFullScreen="" 
                       loading="lazy"
                     ></iframe>
@@ -1632,17 +1632,17 @@ const App = () => {
           <section id="booking" className="section-padding" style={{ background: '#080808', padding: '12rem 0' }}>
             <div className="container">
               <div style={{ display: 'flex', alignItems: 'center', gap: '2rem', marginBottom: '8rem' }}>
-                <h2 style={{ fontSize: '4rem', margin: 0, fontWeight: '900' }} data-reveal>Marque a sua Visita</h2>
+                <h2 style={{ fontSize: 'clamp(2.5rem, 8vw, 4rem)', margin: 0, fontWeight: '900' }} data-reveal>Marque a sua Visita</h2>
                 <div style={{ flex: 1, height: '1px', background: 'var(--glass-border)' }}></div>
               </div>
 
               <div className="blueprint-card" style={{ maxWidth: '900px', margin: '0 auto', borderTop: '4px solid var(--accent)' }} data-reveal>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3rem', fontSize: '0.85rem', fontWeight: '600' }}>
-                  <span style={{ color: 'var(--accent)' }}>STANY BARBERSHOP // MARCAÇÃO</span>
+                  <span style={{ color: 'var(--accent)' }}>NOVA MARCAÇÃO</span>
                   <span style={{ opacity: 0.5 }}>PASSO {step} DE 5</span>
                 </div>
 
-                <div style={{ padding: '3rem' }}>
+                <div className="step-wrapper">
                   {step === 1 && (
                     <div className="step-content">
                       <h3 style={{ marginBottom: '2.5rem', fontSize: '1.5rem', fontWeight: '800' }}>Escolha a Categoria</h3>

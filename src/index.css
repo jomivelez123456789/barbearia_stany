@@ -697,14 +697,21 @@ button {
   }
 
   /* Grids Mobile */
+  [style*="minmax(450px"],
+  [style*="minmax(400px"],
   [style*="minmax(350px"],
   [style*="minmax(300px"],
   [style*="minmax(250px"],
+  [style*="minmax(200px"],
   [style*="minmax(180px"] {
     grid-template-columns: 1fr !important;
   }
 
   /* Booking Form Mobile */
+  .step-wrapper {
+    padding: 1.5rem !important;
+  }
+
   .step-content {
     padding: 0 !important;
   }
