@@ -662,10 +662,10 @@ const App = () => {
           </div>
           
           <div className="container" style={{ paddingTop: '6rem' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-end', marginBottom: '2rem' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '1rem', marginBottom: '2rem' }}>
               <div>
-                <h1 style={{ fontSize: '4rem', margin: 0, fontWeight: '900' }}>RESERVAS</h1>
-                <div style={{ display: 'flex', gap: '1rem', marginTop: '1.5rem' }}>
+                <h1 style={{ fontSize: 'clamp(2.5rem, 10vw, 4rem)', margin: 0, fontWeight: '900' }}>RESERVAS</h1>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', marginTop: '1.5rem' }}>
                   <button 
                     onClick={() => setAdminFilterMode('today')} 
                     className={adminFilterMode === 'today' ? 'btn-primary' : 'btn-outline'}
@@ -694,7 +694,7 @@ const App = () => {
 
             {showManualForm && (
               <div className="glass-card" style={{ padding: '2rem', marginBottom: '3rem', border: '1px solid var(--primary)' }}>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
+                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '1rem', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                   <h3 style={{ margin: 0, color: 'var(--accent)', fontWeight: '900' }}>Nova Marcação — Passo {adminStep} de 4</h3>
                   {adminStep > 1 && <button onClick={() => setAdminStep(adminStep - 1)} className="btn-back" style={{ marginTop: 0, padding: '0.4rem 1rem' }}>← Voltar atras</button>}
                 </div>
@@ -778,7 +778,7 @@ const App = () => {
               </div>
             )}
 
-            <div className="admin-table-container" style={{ maxHeight: '550px', overflowY: 'auto', border: '1px solid var(--glass-border)', borderRadius: '12px' }}>
+            <div className="admin-table-container" style={{ width: '100%', maxWidth: '100vw', maxHeight: '550px', overflowY: 'auto', overflowX: 'hidden', border: '1px solid var(--glass-border)', borderRadius: '12px' }}>
               <div style={{ overflowX: 'auto' }}>
                 <table style={{ width: '100%', borderCollapse: 'collapse', textAlign: 'left' }}>
                   <thead style={{ position: 'sticky', top: 0, background: 'var(--bg-dark)', zIndex: 10 }}>
