@@ -1752,7 +1752,7 @@ const App = () => {
                       <h3 style={{ marginBottom: '1rem', fontSize: '1.5rem', fontWeight: '800' }}>Escolha a Hora</h3>
                       <p style={{ marginBottom: '2.5rem', color: 'var(--text-main)', fontSize: '1.1rem' }}>Horário disponível para {booking.day} de {months[booking.month]} de {booking.year}</p>
                       
-                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
+                      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(85px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                         {getTimeSlotsForDate(booking.day, booking.month, booking.year).map(t => {
                           const serviceStr = booking.services.map(s => s.name).join(' + ');
                           const reqSlots = getRequiredSlots(serviceStr);
@@ -1814,11 +1814,11 @@ const App = () => {
                         </div>
                         
                         <div style={{ background: 'rgba(212, 163, 115, 0.05)', border: '1px solid rgba(212, 163, 115, 0.2)', borderRadius: '16px', marginBottom: '2rem', overflow: 'hidden' }}>
-                          <div style={{ padding: '1.5rem 2rem', borderBottom: '1px solid rgba(212, 163, 115, 0.1)', background: 'rgba(212, 163, 115, 0.03)', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                          <div style={{ padding: '1rem', borderBottom: '1px solid rgba(212, 163, 115, 0.1)', background: 'rgba(212, 163, 115, 0.03)', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '0.5rem' }}>
                             <span style={{ fontSize: '0.9rem', fontWeight: '700', textTransform: 'uppercase', letterSpacing: '1px', opacity: 0.6 }}>Serviços Escolhidos</span>
                             <span style={{ fontSize: '1rem', fontWeight: '800', color: 'var(--accent)' }}>{booking.day} {months[booking.month]}, {booking.time}</span>
                           </div>
-                          <div style={{ padding: '1.5rem 2rem' }}>
+                          <div style={{ padding: '1rem' }}>
                             {booking.services.map((s, idx) => (
                               <div key={idx} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: idx === booking.services.length - 1 ? 0 : '1rem' }}>
                                 <div>
