@@ -1724,7 +1724,7 @@ const App = () => {
 
                   {step === 3 && (
                     <div className="step-content">
-                      <div className="calendar-container">
+                      <div className="calendar-container" style={{ background: 'var(--bg-card)', border: '1px solid var(--glass-border)', borderRadius: '16px', padding: '1.5rem', maxWidth: '450px', margin: '0 auto' }}>
                         <div className="calendar-header" style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '2rem' }}>
                           <h3 style={{ margin: 0 }}>{months[viewDate.getMonth()]} {viewDate.getFullYear()}</h3>
                           <div style={{ display: 'flex', gap: '1rem' }}>
