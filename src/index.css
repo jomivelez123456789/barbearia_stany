@@ -753,10 +753,23 @@ button {
     font-size: 1.2rem !important;
   }
 
+  .calendar-container {
+    padding: 1rem !important;
+  }
+
+  .calendar-grid {
+    gap: 4px !important;
+  }
+
   .calendar-day {
-    max-width: 42px;
-    height: 42px;
-    font-size: 1rem;
+    max-width: 32px !important;
+    height: 32px !important;
+    font-size: 0.85rem !important;
+    padding: 0 !important;
+  }
+
+  .calendar-weekday {
+    font-size: 0.75rem !important;
   }
   
   [style*="110px, 1fr"] {
