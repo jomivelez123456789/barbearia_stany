@@ -23,6 +23,16 @@ html, body {
   max-width: 100vw;
 }
 
+.app, #root {
+  overflow-x: hidden;
+  width: 100%;
+  position: relative;
+}
+
+section {
+  scroll-margin-top: 100px;
+}
+
 body {
   background-color: var(--bg-dark);
   color: var(--text-main);

@@ -228,10 +228,51 @@ const App = () => {
     setShowManualForm(false);
   };
 
+  const getRequiredSlots = (serviceNamesStr) => {
+    if (!serviceNamesStr) return 1;
+    const s = serviceNamesStr.toLowerCase();
+    if (s.includes('barba') && s.includes('corte')) return 2;
+    return 1;
+  };
+
   const isSlotBooked = (d, m, y, t) => {
-    const isBooked = bookings.some(b => b.date.d === d && b.date.m === m && b.date.y === y && b.time === t);
+    const isBookedDirectly = bookings.some(b => b.date.d === d && b.date.m === m && b.date.y === y && b.time === t);
+    
+    const overlapsFromPrevious = bookings.some(b => {
+       if (b.date.d === d && b.date.m === m && b.date.y === y && (b.duration || 1) > 1) {
+          const slots = getTimeSlotsForDate(d, m, y);
+          const startIndex = slots.indexOf(b.time);
+          if (startIndex >= 0) {
+             const occupiedSlots = slots.slice(startIndex, startIndex + (b.duration || 1));
+             return occupiedSlots.includes(t);
+          }
+       }
+       return false;
+    });
+
     const isBlocked = blockedSlots.some(b => b.date.d === d && b.date.m === m && b.date.y === y && b.time === t);
-    return isBooked || isBlocked;
+    return isBookedDirectly || overlapsFromPrevious || isBlocked;
+  };
+
+  const isSlotSufficientForDuration = (d, m, y, t, neededDuration) => {
+    if (neededDuration <= 1) return !isSlotBooked(d, m, y, t);
+    const slots = getTimeSlotsForDate(d, m, y);
+    const startIndex = slots.indexOf(t);
+    if (startIndex === -1 || startIndex + neededDuration > slots.length) return false;
+    
+    for (let i = 0; i < neededDuration; i++) {
+        const slotToCheck = slots[startIndex + i];
+        if (isSlotBooked(d, m, y, slotToCheck)) return false;
+        
+        if (i > 0) {
+           const prevSlot = slots[startIndex + i - 1];
+           const [h1, m1] = prevSlot.split(':').map(Number);
+           const [h2, m2] = slotToCheck.split(':').map(Number);
+           const timeDiff = (h2 * 60 + m2) - (h1 * 60 + m1);
+           if (timeDiff !== 30) return false;
+        }
+    }
+    return true;
   };
 
   const isBookingPast = (b) => {
@@ -330,8 +371,10 @@ const App = () => {
       showToast('Por favor, preencha todos os campos e selecione pelo menos um serviço.', 'error');
       return;
     }
+    const serviceStr = booking.services.map(s => s.name).join(' + ');
     const newBooking = {
-      service: booking.services.map(s => s.name).join(' + '),
+      service: serviceStr,
+      duration: getRequiredSlots(serviceStr),
       price: calculateTotalPrice(booking.services),
       date: { d: booking.day, m: booking.month, y: booking.year },
       time: booking.time,
@@ -348,8 +391,10 @@ const App = () => {
       showToast('Por favor, preencha todos os campos.', 'error');
       return;
     }
+    const serviceStr = adminBooking.service ? adminBooking.service.name || adminBooking.service : 'Serviço Manual';
     const newBooking = {
-      service: adminBooking.service ? adminBooking.service.name || adminBooking.service : 'Serviço Manual',
+      service: serviceStr,
+      duration: getRequiredSlots(typeof serviceStr === 'string' ? serviceStr : ''),
       price: adminBooking.service?.price || '---',
       date: adminBooking.date,
       time: adminBooking.time,
@@ -735,7 +780,9 @@ const App = () => {
                     <p style={{ marginBottom: '1.5rem' }}>3. Escolha a Hora:</p>
                     <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(80px, 1fr))', gap: '0.8rem' }}>
                       {getTimeSlotsForDate(adminBooking.date.d, adminBooking.date.m, adminBooking.date.y).map(t => {
-                        const booked = isSlotBooked(adminBooking.date.d, adminBooking.date.m, adminBooking.date.y, t);
+                        const serviceStr = adminBooking.service ? adminBooking.service.name || adminBooking.service : 'Serviço Manual';
+                        const reqSlotsAdmin = getRequiredSlots(typeof serviceStr === 'string' ? serviceStr : '');
+                        const booked = !isSlotSufficientForDuration(adminBooking.date.d, adminBooking.date.m, adminBooking.date.y, t, reqSlotsAdmin);
                         const disabled = booked;
                         
                         return (
@@ -1636,7 +1683,7 @@ const App = () => {
                 <div style={{ flex: 1, height: '1px', background: 'var(--glass-border)' }}></div>
               </div>
 
-              <div className="blueprint-card" style={{ maxWidth: '900px', margin: '0 auto', borderTop: '4px solid var(--accent)' }} data-reveal>
+              <div className="blueprint-card" style={{ maxWidth: '900px', margin: '0 auto', borderTop: '4px solid var(--accent)', minHeight: '600px' }} data-reveal>
                 <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '3rem', fontSize: '0.85rem', fontWeight: '600' }}>
                   <span style={{ color: 'var(--accent)' }}>NOVA MARCAÇÃO</span>
                   <span style={{ opacity: 0.5 }}>PASSO {step} DE 5</span>
@@ -1707,7 +1754,9 @@ const App = () => {
                       
                       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(110px, 1fr))', gap: '1rem', marginBottom: '2rem' }}>
                         {getTimeSlotsForDate(booking.day, booking.month, booking.year).map(t => {
-                          const booked = isSlotBooked(booking.day, booking.month, booking.year, t);
+                          const serviceStr = booking.services.map(s => s.name).join(' + ');
+                          const reqSlots = getRequiredSlots(serviceStr);
+                          const booked = !isSlotSufficientForDuration(booking.day, booking.month, booking.year, t, reqSlots);
                           const isPast = isPastTimeSlot(t, booking.day, booking.month, booking.year);
                           const disabled = booked || isPast;
                           
